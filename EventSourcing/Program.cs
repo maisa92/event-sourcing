@@ -10,6 +10,22 @@ namespace EventSourcing
     {
         static void Main(string[] args)
         {
+            EventBroker ev = new EventBroker();
+            Person p = new Person(ev);
+            ev.Command(new ChangeAgeCommand(p,123));
+
+            var age =  ev.Query(new GetAgeQuery(p));
+
+            foreach (var e in ev.AllEvents)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            Console.WriteLine(age);
+            ev.UndoLast();
+            Console.WriteLine(age);
+
+            Console.ReadKey();
         }
     }
 }
