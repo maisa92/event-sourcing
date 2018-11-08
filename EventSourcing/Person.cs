@@ -10,7 +10,7 @@ namespace EventSourcing
     {
         private int _age;
         private readonly EventBroker _eventBroker;
-        
+
         public Person(EventBroker brocker)
         {
             _eventBroker = brocker;
@@ -23,7 +23,7 @@ namespace EventSourcing
             var q = query as GetAgeQuery;
             if (q != null && q.Target == this)
             {
-                q.Age = _age; 
+                q.Age = _age;
             }
         }
 
@@ -32,8 +32,8 @@ namespace EventSourcing
             var com = command as ChangeAgeCommand;
 
             if (com != null && com.Target == this)
-            {   
-                _eventBroker.AllEvents.Add(new AgeChangeEvent(this,_age,com.Age));
+            {
+                if (command.Represent) _eventBroker.AllEvents.Add(new AgeChangeEvent(this, _age, com.Age));
                 _age = com.Age;
             }
         }

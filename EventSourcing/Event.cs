@@ -8,6 +8,7 @@ namespace EventSourcing
 {
     public class Event
     {
+      
     }
 
     public class AgeChangeEvent : Event

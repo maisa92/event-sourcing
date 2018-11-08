@@ -23,7 +23,11 @@ namespace EventSourcing
 
             Console.WriteLine(age);
             ev.UndoLast();
-            Console.WriteLine(age);
+            Console.WriteLine(ev.Query(new GetAgeQuery(p)));
+            foreach (var e in ev.AllEvents)
+            {
+                Console.WriteLine(e.ToString());
+            }
 
             Console.ReadKey();
         }

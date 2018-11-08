@@ -8,7 +8,7 @@ namespace EventSourcing
 {
     public class Command : EventArgs
     {
-
+        public bool Represent { get; set; } = true;
     }
 
 
@@ -17,10 +17,11 @@ namespace EventSourcing
         public int Age;
         public Person Target;
 
-        public ChangeAgeCommand(Person p, int age)
+        public ChangeAgeCommand(Person p, int age, bool represent = true)
         {
             Age = age;
             Target = p;
+            Represent = represent;
         }
     }
 }

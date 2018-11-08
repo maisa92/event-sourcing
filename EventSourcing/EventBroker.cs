@@ -30,7 +30,8 @@ namespace EventSourcing
             var ac = e as AgeChangeEvent;
             if (ac  != null)
             {
-                Command(new ChangeAgeCommand(ac.Target,ac.OldAge));
+                Command(new ChangeAgeCommand(ac.Target,ac.OldAge, false));
+                AllEvents.Remove(ac);
             }
         }
     }
